@@ -102,15 +102,6 @@
       <progress value="0" max="5" id="progressBar" class="progress"></progress>
       <div id="countdown"></div>
     </div>
-    <!-- Блок возврата на начальную страницу -->
-    <!-- <div class="return">
-      <div class="return__info">
-        <div class="return__text">Если Вы желаете вернуться на предыдущую страницу, нажмите кнопку "НАЗАД"</div>
-      </div>
-      <div class="return__btn" onclick="back()">
-        Назад
-      </div>
-    </div> -->
   </div>
   <script>
     let timeleft = 5;
@@ -120,10 +111,15 @@
     document.getElementById("link").innerHTML = nowUrlFull;
     // Адресс перехода без домена
     let nowUrl = document.location.search;
+    let domain = "https://www.youtube.com";
+    // Добавим атрибут для ссылки
+    document.getElementById("link").setAttribute("href", domain + nowUrl);
+    // Таймер
     let downloadTimer = setInterval(function () {
       if (timeleft < 0) {
         clearInterval(downloadTimer);
-        console.log(nowUrl)
+        console.log(domain + nowUrl);
+        window.location.href = domain + nowUrl;
       } else {
         document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
       }
@@ -131,12 +127,6 @@
       timeleft -= 1;
     }, 1000);
   </script>
-
-  <!-- <script>
-    function back() {
-      window.location.href = document.referrer;
-    }
-  </script> -->
 </body>
 
 </html>
