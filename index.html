@@ -43,6 +43,7 @@
 
     .title__info-text-moment {
       font-size: 14px;
+      padding-top: 40px;
     }
 
     .link-to {
@@ -51,34 +52,43 @@
       display: inline-block;
     }
 
-    /* Стили для таймера */
-    /* .timer {
-      padding-bottom: 120px;
-    } */
-
-    /* Стили для блока возврата на предыдущую страницу */
-    .return__btn {
-      display: inline-block;
-      margin-top: 30px;
-      border: 2px solid red;
-      border-radius: 5px;
-      letter-spacing: 2px;
-      padding: 10px 40px;
-      background-color: red;
-      box-shadow: 0px 0px 17px 0px rgba(245, 12, 12, 1);
-      transition: .9s;
+    /* Прелоадер */
+    .preloader {
+      display: flex;
+      align-self: center;
+      width: 64px;
+      height: 64px;
+      margin: 8px;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      border-color: #fff transparent #fff transparent;
+      animation: curtain 1.2s linear infinite;
     }
 
-    .return__btn:hover {
-      cursor: pointer;
-      box-shadow: 0px 0px 25px 0px rgba(245, 12, 12, 1);
+    @keyframes curtain {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     /* /////////////////МЕДИА-ЗАПРОСЫ////////////////// */
     @media screen and (max-height: 400px) {
       body {
-        /* color: red; */
         font-size: 12px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      body {
+        font-size: 16px;
+      }
+
+      .link-to {
+        font-size: 14px;
       }
     }
   </style>
@@ -90,12 +100,13 @@
     <div class="title">
       <div class="title__info">
         <p class="title__info-text">По истичении действия таймера, Вы перейдете по адрессу:</p>
-        <p class="title__info-text-moment">Если не хотите ждать, кликайте по ссылке</p>
-
         <!-- Путь куда будет перенаправлен пользователь -->
         <a id="link" class="link-to" href="#" rel="noopener noreferrer"></a>
+        <p class="title__info-text-moment">Если не хотите ждать, кликайте по ссылке</p>
       </div>
     </div>
+    <!-- Блок с прелоадером -->
+    <div class="preloader"></div>
     <!-- Блок с таймером -->
     <div class="timer">
       <!-- Значение "max = 5", менять на количество секунд необходимых для перехода на другую страницу. (Значение должно соответствовавть значению в переменной timeleft, а также цифре в ".value = 5 - timeleft") -->
@@ -118,8 +129,7 @@
     let downloadTimer = setInterval(function () {
       if (timeleft < 0) {
         clearInterval(downloadTimer);
-        console.log(domain + nowUrl);
-        window.location.href = domain + nowUrl;
+        // window.location.href = domain + nowUrl;
       } else {
         document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
       }
