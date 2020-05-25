@@ -47,9 +47,15 @@
     }
 
     .link-to {
-      color: red;
+      color: white;
       font-size: 20px;
       display: inline-block;
+      border: .8px solid red;
+      border-radius: 5px;
+      padding: 15px 40px;
+      text-decoration: none;
+      background: rgb(253, 45, 45);
+      background: linear-gradient(0deg, rgba(253, 45, 45, 1) 0%, rgba(232, 130, 130, 0.969625350140056) 100%);
     }
 
     /* Прелоадер */
@@ -101,8 +107,8 @@
       <div class="title__info">
         <p class="title__info-text">По истичении действия таймера, Вы перейдете по адрессу:</p>
         <!-- Путь куда будет перенаправлен пользователь -->
-        <a id="link" class="link-to" href="#" rel="noopener noreferrer"></a>
-        <p class="title__info-text-moment">Если не хотите ждать, кликайте по ссылке</p>
+        <a id="link" class="link-to" href="#" rel="noopener noreferrer">Перейти</a>
+        <p class="title__info-text-moment">Если не хотите ждать, кликайте по кнопке</p>
       </div>
     </div>
     <!-- Блок с прелоадером -->
@@ -118,8 +124,6 @@
     let timeleft = 5;
     // Полный адресс перехода
     let nowUrlFull = document.location.href;
-    // Отобразим на странице ссылку с адресом для перехода
-    document.getElementById("link").innerHTML = nowUrlFull;
     // Адресс перехода без домена
     let nowUrl = document.location.search;
     let domain = "https://www.youtube.com";
