@@ -129,7 +129,7 @@
     let downloadTimer = setInterval(function () {
       if (timeleft < 0) {
         clearInterval(downloadTimer);
-        // window.location.href = domain + nowUrl;
+        window.location.href = domain + nowUrl;
       } else {
         document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
       }
