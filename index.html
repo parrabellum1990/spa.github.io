@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spa</title>
+  <style>
+    /* Глобальное обнуление стилей */
+    html,
+    body,
+    p {
+      padding: 0;
+      margin: 0;
+    }
+
+    html,
+    body {
+      padding: 0 10px;
+      font-family: Arial, Georgia, Times, 'Times New Roman', sans-serif;
+      background: linear-gradient(to right, #2193b0, #6dd5ed);
+      font-weight: bold;
+      font-size: 18px;
+      color: whitesmoke;
+      line-height: 30px;
+      letter-spacing: .8px;
+    }
+
+    /* Контейнер */
+    .container {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      text-align: center;
+    }
+
+    /* Стили для блока с текстом */
+    .title__info-text {
+      padding-bottom: 20px;
+    }
+
+    .title__info-text-moment {
+      font-size: 14px;
+    }
+
+    .link-to {
+      color: red;
+      font-size: 20px;
+      display: inline-block;
+    }
+
+    /* Стили для таймера */
+    /* .timer {
+      padding-bottom: 120px;
+    } */
+
+    /* Стили для блока возврата на предыдущую страницу */
+    .return__btn {
+      display: inline-block;
+      margin-top: 30px;
+      border: 2px solid red;
+      border-radius: 5px;
+      letter-spacing: 2px;
+      padding: 10px 40px;
+      background-color: red;
+      box-shadow: 0px 0px 17px 0px rgba(245, 12, 12, 1);
+      transition: .9s;
+    }
+
+    .return__btn:hover {
+      cursor: pointer;
+      box-shadow: 0px 0px 25px 0px rgba(245, 12, 12, 1);
+    }
+
+    /* /////////////////МЕДИА-ЗАПРОСЫ////////////////// */
+    @media screen and (max-height: 400px) {
+      body {
+        /* color: red; */
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Блок с текстом о переходе на страницу -->
+    <div class="title">
+      <div class="title__info">
+        <p class="title__info-text">По истичении действия таймера, Вы перейдете по адрессу:</p>
+        <p class="title__info-text-moment">Если не хотите ждать, кликайте по ссылке</p>
+
+        <!-- Путь куда будет перенаправлен пользователь -->
+        <a id="link" class="link-to" href="#" rel="noopener noreferrer"></a>
+      </div>
+    </div>
+    <!-- Блок с таймером -->
+    <div class="timer">
+      <!-- Значение "max = 5", менять на количество секунд необходимых для перехода на другую страницу. (Значение должно соответствовавть значению в переменной timeleft, а также цифре в ".value = 5 - timeleft") -->
+      <progress value="0" max="5" id="progressBar" class="progress"></progress>
+      <div id="countdown"></div>
+    </div>
+    <!-- Блок возврата на начальную страницу -->
+    <!-- <div class="return">
+      <div class="return__info">
+        <div class="return__text">Если Вы желаете вернуться на предыдущую страницу, нажмите кнопку "НАЗАД"</div>
+      </div>
+      <div class="return__btn" onclick="back()">
+        Назад
+      </div>
+    </div> -->
+  </div>
+  <script>
+    let timeleft = 5;
+    // Полный адресс перехода
+    let nowUrlFull = document.location.href;
+    // Отобразим на странице ссылку с адресом для перехода
+    document.getElementById("link").innerHTML = nowUrlFull;
+    // Адресс перехода без домена
+    let nowUrl = document.location.search;
+    let downloadTimer = setInterval(function () {
+      if (timeleft < 0) {
+        clearInterval(downloadTimer);
+        console.log(nowUrl)
+      } else {
+        document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
+      }
+      document.getElementById("progressBar").value = 5 - timeleft;
+      timeleft -= 1;
+    }, 1000);
+  </script>
+
+  <!-- <script>
+    function back() {
+      window.location.href = document.referrer;
+    }
+  </script> -->
+</body>
+
+</html>
